@@ -1,18 +1,21 @@
-<template lang="">
+<template>
   <q-layout view="lHh Lpr lFf">
     <!-- Navbar -->
     <the-header />
+
+    <!-- Main Content -->
     <q-page-container>
-      <q-page class="bg-dark q-pa-xl">
+      <q-page class="bg-dark q-pa-xl" style="padding-top: 64px">
         <!-- CTA Section -->
         <cta-section @back="handleBack" />
+
         <!-- Tile Section -->
         <movie-tile
           :title="currentMovie.title"
           :rating="currentMovie.rating"
           :star-rating="3"
           @quality-changed="handleQualityChange" />
-        <!-- Section 1: Movie List and Video -->
+
         <!-- Section 1: Movie List and Video -->
         <div class="row q-gutter-x-xl">
           <!-- Movie List -->
@@ -28,18 +31,24 @@
             @play="handlePlay"
             @seek="handleSeek" />
         </div>
+
+        <!-- Different Players Section -->
+        <player-options
+          @show-info="showInfo"
+          @select-player="selectPlayer"
+          @download="downloadMovie" />
       </q-page>
     </q-page-container>
   </q-layout>
 </template>
+
 <script>
 import TheHeader from "./components/TheHeader.vue";
 import CtaSection from "./components/CtaSection.vue";
 import MovieTile from "./components/MovieTile.vue";
 import MovieList from "./components/MovieList.vue";
 import VideoPlayer from "./components/VideoPlayer.vue";
-
-//images
+import PlayerOptions from "./components/PlayerOptions.vue";
 import image1 from "./assets/images/1.jpg";
 import image2 from "./assets/images/2.jpg";
 import image3 from "./assets/images/3.jpg";
@@ -52,6 +61,7 @@ export default {
     MovieTile,
     MovieList,
     VideoPlayer,
+    PlayerOptions,
   },
   data() {
     return {
@@ -110,7 +120,6 @@ export default {
       );
     },
   },
-
   methods: {
     handleBack() {
       console.log("Back button clicked");
@@ -132,7 +141,38 @@ export default {
     handleSeek(event) {
       console.log("Seek to position:", event);
     },
+    showInfo() {
+      console.log("Show info clicked");
+    },
+    selectPlayer(player) {
+      console.log("Player selected:", player.label);
+    },
+    downloadMovie() {
+      console.log("Download movie clicked");
+    },
   },
 };
 </script>
-<style lang=""></style>
+
+<style lang="scss">
+body {
+  background-color: #1b1c1f;
+  font-family: "Yekan Bakh", sans-serif;
+}
+
+.q-btn {
+  border-radius: 4px;
+}
+
+.q-chip {
+  padding: 0 4px;
+}
+
+.q-select {
+  border-radius: 8px;
+}
+
+.q-linear-progress {
+  border-radius: 0;
+}
+</style>
