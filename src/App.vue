@@ -12,6 +12,22 @@
           :rating="currentMovie.rating"
           :star-rating="3"
           @quality-changed="handleQualityChange" />
+        <!-- Section 1: Movie List and Video -->
+        <!-- Section 1: Movie List and Video -->
+        <div class="row q-gutter-x-xl">
+          <!-- Movie List -->
+          <movie-list
+            :movies="movies"
+            @select-movie="selectMovie"
+            @view-more="viewMoreMovies" />
+
+          <!-- Video Player -->
+          <video-player
+            :thumbnail="currentMovie.thumbnail"
+            :duration="150"
+            @play="handlePlay"
+            @seek="handleSeek" />
+        </div>
       </q-page>
     </q-page-container>
   </q-layout>
@@ -20,6 +36,8 @@
 import TheHeader from "./components/TheHeader.vue";
 import CtaSection from "./components/CtaSection.vue";
 import MovieTile from "./components/MovieTile.vue";
+import MovieList from "./components/MovieList.vue";
+import VideoPlayer from "./components/VideoPlayer.vue";
 
 //images
 import image1 from "./assets/images/1.jpg";
@@ -32,6 +50,8 @@ export default {
     TheHeader,
     CtaSection,
     MovieTile,
+    MovieList,
+    VideoPlayer,
   },
   data() {
     return {
@@ -98,6 +118,19 @@ export default {
     handleQualityChange(quality) {
       this.quality = quality;
       console.log("Quality changed to:", quality);
+    },
+    selectMovie(movie) {
+      this.currentMovieId = movie.id;
+      console.log("Movie selected:", movie.title);
+    },
+    viewMoreMovies() {
+      console.log("View more movies clicked");
+    },
+    handlePlay(isPlaying) {
+      console.log("Play state:", isPlaying ? "playing" : "paused");
+    },
+    handleSeek(event) {
+      console.log("Seek to position:", event);
     },
   },
 };
