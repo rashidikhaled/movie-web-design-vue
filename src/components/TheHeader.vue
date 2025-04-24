@@ -35,32 +35,24 @@
           @click="$emit('back')" />
       </div>
       <!-- Right Navbar Section -->
-      <div class="row items-center q-gutter-x-lg q-ml-auto">
-        <div class="lt-md" v-if="isMobileMenuOpen">
+      <div class="row items-center q-ml-auto">
+        <!-- Mobile menu toggle button -->
+        <div class="lt-md">
           <q-btn
             flat
             round
             dense
-            icon="close"
+            :icon="isMobileMenuOpen ? 'close' : 'menu'"
             @click="toggleMobileMenu"
-            aria-label="Close menu" />
+            aria-label="Toggle menu" />
         </div>
-        <div class="lt-md" v-else>
-          <q-btn
-            flat
-            round
-            dense
-            icon="menu"
-            @click="toggleMobileMenu"
-            aria-label="Open menu" />
-        </div>
-        <div
-          :class="[
-            'row items-center q-gutter-x-lg my-font',
-            { hidden: isMobile && !isMobileMenuOpen },
-          ]">
+
+        <!-- Desktop navigation -->
+        <div class="gt-sm row items-center q-gutter-x-lg my-font">
           <q-btn v-for="link in links" :key="link" flat dense :label="link" />
         </div>
+
+        <!-- Logo -->
         <img
           :src="image"
           alt="Film Tarsnak Logo"
@@ -68,6 +60,31 @@
           v-bind="$attrs" />
       </div>
     </q-toolbar>
+
+    <!-- Mobile menu overlay -->
+    <q-dialog
+      v-model="isMobileMenuOpen"
+      position="top"
+      full-width
+      transition-show="slide-down"
+      transition-hide="slide-up"
+      class="mobile-menu-dialog">
+      <q-card class="bg-dark text-white">
+        <q-card-section>
+          <div class="column items-center q-gutter-y-md my-font">
+            <q-btn
+              v-for="link in links"
+              :key="link"
+              flat
+              no-caps
+              class="full-width text-center"
+              size="lg"
+              :label="link"
+              @click="isMobileMenuOpen = false" />
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </q-header>
 </template>
 
@@ -132,7 +149,48 @@ export default {
   .hidden {
     display: none !important;
   }
+
+  .q-toolbar {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .q-gutter-x-sm {
+    margin-left: -4px !important;
+  }
+
+  .q-gutter-x-sm > * {
+    margin-left: 4px !important;
+  }
+
+  @media (max-width: 480px) {
+    .logo {
+      width: 100px;
+      height: 32px;
+    }
+
+    .q-gutter-x-sm > * {
+      margin-left: 2px !important;
+    }
+
+    .q-btn {
+      padding: 4px !important;
+      min-height: auto !important;
+    }
+  }
 }
+
+.mobile-menu-dialog .q-card {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.mobile-menu-dialog .q-btn {
+  font-size: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 0;
+}
+
 .my-font {
   font-family: "Yekan-Regular";
 }
