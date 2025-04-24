@@ -1,0 +1,23 @@
+/* Yekan Font */
+@font-face {
+  font-family: "Yekan";
+  src: url("./Yekan.eot");
+  src: url("./Yekan.eot?#iefix") format("embedded-opentype"),
+    url("./Yekan.woff") format("woff"), url("./Yekan.ttf") format("truetype"),
+    url("./Yekan.svg#Yekan") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Yekan Regular Font */
+@font-face {
+  font-family: "Yekan-Regular";
+  src: url("./yekan-regular.eot");
+  src: url("./yekan-regular.eot?#iefix") format("embedded-opentype"),
+    url("./yekan-regular.woff") format("woff"),
+    url("./yekan-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

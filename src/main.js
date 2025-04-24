@@ -8,6 +8,7 @@ import "@quasar/extras/material-icons/material-icons.css";
 
 // Import Quasar css
 import "quasar/src/css/index.sass";
+import "./style.css";
 
 // Assumes your root component is App.vue
 // and placed in same folder as main.js
