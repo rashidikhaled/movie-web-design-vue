@@ -56,13 +56,13 @@
         </div>
         <div
           :class="[
-            'row items-center q-gutter-x-lg',
+            'row items-center q-gutter-x-lg my-font',
             { hidden: isMobile && !isMobileMenuOpen },
           ]">
           <q-btn v-for="link in links" :key="link" flat dense :label="link" />
         </div>
         <img
-          src="/logo.png"
+          :src="image"
           alt="Film Tarsnak Logo"
           class="q-ml-md logo"
           v-bind="$attrs" />
@@ -72,6 +72,8 @@
 </template>
 
 <script>
+import image4 from "../assets/images/4.jpg";
+
 export default {
   name: "TheHeader",
   props: {
@@ -98,6 +100,7 @@ export default {
     return {
       isMobileMenuOpen: false,
       isMobile: false,
+      image: image4,
     };
   },
   mounted() {
@@ -129,5 +132,8 @@ export default {
   .hidden {
     display: none !important;
   }
+}
+.my-font {
+  font-family: "Yekan-Regular";
 }
 </style>

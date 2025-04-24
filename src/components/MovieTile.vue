@@ -6,7 +6,7 @@
 
     <!-- Ratings -->
     <div class="row items-center q-mr-sm">
-      <img src="/imdb.png" alt="IMDB" class="q-mr-xs" />
+      <img :src="imdbLogo" alt="IMDB" class="q-mr-xs imdb-logo" />
       <span class="text-h6 text-weight-bolder">{{ rating }}</span>
       <span class="text-subtitle1 text-grey-7 q-ml-xs">/10</span>
     </div>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import imdbLogo from "../assets/images/imdb.svg";
 export default {
   name: "MovieTile",
   props: {
@@ -78,6 +79,7 @@ export default {
     return {
       selectedQuality: this.quality + "p",
       qualityOptions: ["1080p", "720p", "480p"],
+      imdbLogo: imdbLogo,
     };
   },
   watch: {
@@ -91,5 +93,9 @@ export default {
 <style scoped>
 .quality-select {
   width: 183px;
+}
+.imdb-logo {
+  width: 24px;
+  height: 24px;
 }
 </style>
